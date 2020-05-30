@@ -176,11 +176,6 @@ int CMpegProgramStreamParser::splitPsByPacketHeader(const std::string inputFilen
                 ret = getNextStartCodeRange(p11, p33 - p11 + 1, 0xC0, 0xEF, p11); // 00 00 01 E0    VIDEO_ID
                 if (ret == 0 || cnt2 > 0)
                 {
-                    if (p11 - p == 0x42773)
-                    {
-                        int a = 1;
-                    }
-
                     if (ret != 0 && cnt2 > 0)
                     {
                         p11 = p33;
@@ -438,7 +433,7 @@ int CMpegProgramStreamParser::readOnePsMapHeader(unsigned char *buffer, int buff
     {
         PS_ELEMENTARY_STREAM_MAP_INFO ps_elementary_stream_map_info;
 
-        ps_elementary_stream_map_info.stream_type = bs.readBits(8);
+        ps_elementary_stream_map_info.stream_type = bs.readBits(8); //[0x10: MPEG-4视频流]; [0x1B: H.264视频流]; [0x80: SVAC视频流]; [0x90: G.711音频流]; [0x92:  G.722.1音频流]; [0x93: G.723.1音频流]; [0x99: G.729音频流]; [0x9B: SVAC音频流];
         ps_elementary_stream_map_info.elementary_stream_id = bs.readBits(8);
         ps_elementary_stream_map_info.elementary_stream_info_length = bs.readBits(16);
         for (int j = 0; j < ps_elementary_stream_map_info.elementary_stream_info_length; ++j)

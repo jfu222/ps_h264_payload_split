@@ -235,7 +235,7 @@ public:
 
 typedef struct _PS_ELEMENTARY_STREAM_MAP_INFO_
 {
-    int stream_type; //8bits
+    int stream_type; //8bits    [0x10: MPEG-4视频流]; [0x1B: H.264视频流]; [0x80: SVAC视频流]; [0x90: G.711音频流]; [0x92:  G.722.1音频流]; [0x93: G.723.1音频流]; [0x99: G.729音频流]; [0x9B: SVAC音频流];
     int elementary_stream_id; //8bits
     int elementary_stream_info_length; //16bits
 
